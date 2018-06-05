@@ -1,0 +1,27 @@
+.container-fluid {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+.row{
+  overflow: scroll;
+  height: 100%;
+  margin: 0;
+}
+
+.track-day {
+  float: left;
+  min-width: 250px;
+}
+
+.track-day>h1{
+  text-align: center;
+}
+
+#selecttime {
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  child-align: middle;
+}

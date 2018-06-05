@@ -1,0 +1,171 @@
+<div class="d-flex">
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: large; font-weight: bold;">Patient</h5>
+
+    <ul class="list-group">
+      <li class="list-group-item">Namn: {{patient.Namn}} </li>
+      <li class="list-group-item">Personnummer: {{patient.Personnummer}} </li>
+      <li class="list-group-item">ICD10: {{patient.ICD10}} </li>
+      <li class="list-group-item">Senaste Operationsdatum: {{patient.Tid}}</li>
+      <li class="list-group-item">Brådskandegrad: {{urgency}}</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: large; font-weight: bold;">Operation</h5>
+    <ul class="list-group">
+      <li class="list-group-item">Total operationstid: {{patient.totalOperationTime}} minuter</li>
+    </ul>
+    <div *ngIf="patient.procedures.length > 0">
+      <h5 class="card-title" style="font-weight: bold;">Huvudåtgärd</h5>
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mainprocedure">{{patient.procedures[0].description}} <span class="glyphicon glyphicon-chevron-down" style="vertical-align: middle; width: 10px"></span></button>
+      <div id="mainprocedure" class="collapse">
+        <ul class="list-group">
+          <li class="list-group-item">KVÅkod: {{patient.procedures[0]['kvåCode']}}</li>
+          <li class="list-group-item">Förberedelsetid: {{patient.procedures[0].preparationTime}} minuter</li>
+          <li class="list-group-item">Operationstid: {{patient.procedures[0].operationTime}} minuter</li>
+          <li class="list-group-item">Avvecklingstid: {{patient.procedures[0].dismantlingTime}} minuter</li>
+          <li class="list-group-item">Ställtid: {{patient.procedures[0].downTime}} minuter</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="patient.procedures.length > 1">
+      <h5 class="card-title" style="font-weight: bold;">Åtgärd 2</h5>
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#procedure2">{{patient.procedures[1].description}} <span class="glyphicon glyphicon-chevron-down" style="vertical-align: middle; width: 10px"></span></button>
+      <div id="procedure2" class="collapse">
+        <ul class="list-group">
+          <li class="list-group-item">KVÅkod: {{patient.procedures[1]['kvåCode']}}</li>
+          <li class="list-group-item">Förberedelsetid: {{patient.procedures[1].preparationTime}} minuter</li>
+          <li class="list-group-item">Operationstid: {{patient.procedures[1].operationTime}} minuter</li>
+          <li class="list-group-item">Avvecklingstid: {{patient.procedures[1].dismantlingTime}} minuter</li>
+          <li class="list-group-item">Ställtid: {{patient.procedures[1].downTime}} minuter</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="patient.procedures.length > 2">
+      <h5 class="card-title" style="font-weight: bold;">Åtgärd 3</h5>
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#procedure3">{{patient.procedures[2].description}} <span class="glyphicon glyphicon-chevron-down" style="vertical-align: middle; width: 10px"></span></button>
+      <div id="procedure3" class="collapse">
+        <ul class="list-group">
+          <li class="list-group-item">KVÅkod: {{patient.procedures[2]['kvåCode']}}</li>
+          <li class="list-group-item">Förberedelsetid: {{patient.procedures[2].preparationTime}} minuter</li>
+          <li class="list-group-item">Operationstid: {{patient.procedures[2].operationTime}} minuter</li>
+          <li class="list-group-item">Avvecklingstid: {{patient.procedures[2].dismantlingTime}} minuter</li>
+          <li class="list-group-item">Ställtid: {{patient.procedures[2].downTime}} minuter</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="patient.procedures.length > 3">
+      <h5 class="card-title" style="font-weight: bold;">Åtgärd 4</h5>
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#procedure4">{{patient.procedures[3].description}} <span class="glyphicon glyphicon-chevron-down" style="vertical-align: middle; width: 10px"></span></button>
+      <div id="procedure4" class="collapse">
+        <ul class="list-group">
+          <li class="list-group-item">KVÅkod: {{patient.procedures[3]['kvåCode']}}</li>
+          <li class="list-group-item">Förberedelsetid: {{patient.procedures[3].preparationTime}} minuter</li>
+          <li class="list-group-item">Operationstid: {{patient.procedures[3].operationTime}} minuter</li>
+          <li class="list-group-item">Avvecklingstid: {{patient.procedures[3].dismantlingTime}} minuter</li>
+          <li class="list-group-item">Ställtid: {{patient.procedures[3].downTime}} minuter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: large; font-weight: bold;">Bokning</h5>
+
+    <ul class="list-group">
+      <li class="list-group-item">Bokningsstatus: {{bookingStatus}}</li>
+      <li *ngIf="patient.booking" class="list-group-item">Operationsstart: {{bookedStartDate}}</li>
+      <li *ngIf="patient.booking" class="list-group-item">Operationsslut: {{bookedEndDate}}</li>
+      <li *ngIf="patient.booking" class="list-group-item">Operationssal: {{bookedRoomName}}</li>
+      <li *ngIf="patient.booking" class="list-group-item">Personal: {{bookedStaffName}}</li>
+
+    </ul>
+  </div>
+
+
+</div>
+</div>
+
+
+  <div class="d-flex">
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size: large; font-weight: bold;">Boka</h5>
+         <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Starttid:</span>
+                <input type="text" class="form-control" [value]="startDate" [(ngModel)]="startDate"/>
+              </div>
+
+              <div class="input-group-prepend">
+                <span class="input-group-text">Sluttid:</span>
+                <input type="text" class="form-control" [value]="endDate" [(ngModel)]="endDate"/>
+              </div>
+
+
+              <div class="input-group-prepend">
+                <span class="input-group-text">Sal:</span>
+                <select [(ngModel)]="selectedRoom" class="form-control" (ngModelChange)="setCurrentRoom()">
+                  <option *ngFor="let room of rooms">{{room.name}}</option>
+                </select>
+              </div>
+
+              <div class="input-group-prepend">
+                <span class="input-group-text">Personal:</span>
+                <select #selectedStaff class="form-control" (change)="setCurrentStaff(selectedStaff.value)">
+                  <option *ngFor="let staff of staffList">{{staff.firstname + ' ' + staff.lastname}}</option>
+                </select>
+              </div>
+              <div class="input-group-prepend">
+                <span class="input-group-text">Status:</span>
+                <select #selectedStatus class="form-control" (change)="setCurrentStatus(selectedStatus.value)">
+                  <option>Slutgiltig</option>
+                  <option>Preliminär</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        <button class="btn btn-primary" *ngIf="!this.patient.booking" (click)="onFormSubmit()">Boka Operation</button>
+        <button class="btn btn-primary" *ngIf="this.patient.booking" (click)="onFormSubmit()">Omboka Operation</button>
+        <button class="btn btn-primary" *ngIf="this.patient.booking" (click)="unbook()">Avboka Operation</button>
+      </div>
+    </div>
+
+  </div>
+
+<div class="card mb-3" >
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: large; font-weight: bold;">Materiel</h5>
+  </div>
+  <div class="container-fluid" style="width: 903px">
+    <table class="table" style = "table-layout: fixed;">
+      <thead>
+      <tr>
+        <th>Namn</th>
+        <th>Typ</th>
+        <th>Kvantitet</th>
+        <th>Steriliseringstid</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let materiel of this.material">
+      <tr>
+        <td>{{materiel.name}}</td>
+        <td>{{materiel.Material_type.name}}</td>
+        <td>{{materiel.quantity}}</td>
+        <td>{{materiel.sterilizing_time}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

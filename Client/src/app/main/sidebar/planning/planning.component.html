@@ -1,0 +1,110 @@
+<!-- Titlebar -->
+<div id = titlebar class="container dark-c"><app-titlebar></app-titlebar></div>
+
+<!-- Titlebar -->
+<div id="buttonpanel" class="container-fluid dark-c"><app-buttonpanel></app-buttonpanel></div>
+
+<!-- Infoheader -->
+<div id="infoheader" class="container-fluid"><app-infoheader></app-infoheader></div>
+
+
+<!-- Side navigation -->
+<div class="sidenav dark-c">
+
+  <div class="container" style="width: 100%">
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#decision_info" style="width: 100%">Beslutsinformation</button>
+    <div id="decision_info" class="collapse" style="color: whitesmoke;">
+
+      <h4>Allmän data:</h4>
+      <div class="col-md-12 rowp">Namn: {{patient.Namn}}</div>
+      <div class="col-md-12 rowp">Personnummer: {{patient.Personnummer}}</div>
+      <div class="col-md-12 rowp">ICD10: {{patient.ICD10}}</div>
+
+      <tr class="blank_row">
+        <td colspan="3"></td>
+      </tr>
+
+      <h4>Tid:</h4>
+      <div class="col-md-12 rowp">Sista datum: {{patient.Tid}}</div>
+      <div class="col-md-12 rowp">Brådskandegrad: {{patient.Bradskandegrad === true ? 'Akut' : 'Elektiv'}}</div>
+      <div class="col-md-12 rowp">Total operationstid: {{patient.totalOperationTime}} minuter</div>
+
+      <tr class="blank_row">
+        <td colspan="3"></td>
+      </tr>
+
+      <div *ngFor="let procedure of patient.procedures; let first = first; let i = index">
+        <h4 *ngIf="first">Huvudåtgärd</h4>
+        <div>
+          <tr class="blank_row">
+            <td colspan="3"></td>
+          </tr>
+          <h4 *ngIf="!first">Åtgärd {{i+1}}</h4>
+        </div>
+        <div class="col-md-12 rowp">Kvåkod: {{procedure['kvåCode']}}</div>
+        <div class="col-md-12 rowp">Beskrivning: {{procedure.description}}</div>
+        <div class="col-md-12 rowp">Förberedelsetid: {{procedure.preparationTime}} minuter</div>
+        <div class="col-md-12 rowp">Operationstid: {{procedure.operationTime}} minuter</div>
+        <div class="col-md-12 rowp">Avvecklingstid: {{procedure.dismantlingTime}} minuter</div>
+        <div class="col-md-12 rowp">Postoperativ tid: {{procedure.postOperationalTime}} minuter</div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" style="width: 100%">
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#materiel_list" style="width: 100%">Materiellista</button>
+    <div id="materiel_list" class="collapse" style="color: whitesmoke;" >
+      <div *ngFor="let materiel of this.material">
+          <div class="card bg-dark text-center mb-3 mt-3">
+            <div class="card-header bg-secondary">
+              {{materiel.name}}
+            </div>
+            <ul class="list-group list-group-flush list-unstyled">
+              <li class="Antal"> Kvantitet: {{materiel.quantity}} st</li>
+              <li class="sterilisering tid">Steriliseringstid: {{materiel.sterilizing_time}} minuter</li>
+              <li class="artikelnum">Artikelnummer: {{materiel.article_no}}</li>
+              <li class="artikelnum">Artikeltyp: {{materiel.Material_type.name}}</li>
+
+            </ul>
+          </div>
+        </div>
+
+
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container" style="width: 100%">
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#search_parameters" style="width: 100%">Sökparametrar</button>
+    <div id="search_parameters" class="collapse" style="color: whitesmoke;">
+
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+
+      <br>
+      <br>
+
+      <div class="container" style="width: 100%">
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#search-param" style="width: 100%">Lägg till sökparameter</button>
+        <div id="search-param" class="collapse" style="color: whitesmoke;">
+
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+

@@ -1,0 +1,156 @@
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Event action occurred</h5>
+    <button type="button" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary">OK</button> <!--(click)="close()" Throws error duh know how to fix-->
+  </div>
+</ng-template>
+
+<div class="row text-center">
+  <div class="col-md-4">
+      <div *ngIf="view !== 'summery'"
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false"
+        (click)="refreshView()">
+        Tidigare
+      </div>
+      <div *ngIf="view !== 'summery'"
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+        (click)="refreshView()">
+        Idag
+      </div>
+      <div *ngIf="view !== 'summery'"
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false"
+        (click)="refreshView()">
+        Nästa
+      </div>
+    </div>
+  <div class="col-md-4">
+    <h3 *ngIf="view !== 'summery'">{{ viewDate | calendarDate:(view + 'ViewTitle'):'sv' }}</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        (click)="view = 'month'"
+        [class.active]="view === 'month'">
+        Månad
+      </div>
+      <!--<div
+        class="btn btn-primary"
+        (click)="view = 'week'"
+        [class.active]="view === 'week'">
+        Vecka
+      </div>-->
+      <div
+        class="btn btn-primary"
+        (click)="view = 'day'"
+        [class.active]="view === 'day'">
+        Dag
+      </div>
+      <div *ngIf="currentPatient"
+        class="btn btn-primary"
+        (click)="view = 'summery'"
+        [class.active]="view === 'summery'">
+        Sammanfattning
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+
+<div *ngIf="view !== 'summery'" class="row text-center">
+  <div class="col-md">
+    <div class="btn-group pull-right">
+
+      <button type="button" class="btn dropdown-toggle btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Välj salar
+      </button>
+
+      <div class="dropdown-menu">
+        <div *ngFor="let room of roomMap | keys" class="dropdown-item">
+          <input type="checkbox" value="{{room.value.id}}" (change)="updateRooms($event, room.key)" *ngIf="room.value" checked/>
+          <input type="checkbox" value="{{room.value.id}}" (change)="updateRooms($event, room.key)" *ngIf="room.value == false"/>
+          {{room.key}}</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row a">
+  <div class="col col-a">
+    <div [ngSwitch]="view">
+
+      <div id ="summery-cards" *ngSwitchCase="'summery'"><app-summery-cards></app-summery-cards></div>
+
+      <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [locale]="locale"
+        [weekStartsOn]="weekStartsOn"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+
+        (beforeViewRender)="beforeMonthViewRender($event)">
+      </mwl-calendar-month-view>
+
+      <mwl-calendar-week-view
+        precision="minutes"
+        *ngSwitchCase="'week'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [locale]="locale"
+        [weekStartsOn]="weekStartsOn"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-week-view>
+
+      <div class="tracks-day-view" *ngSwitchCase="'day'">
+          <!--<template #dayView></template>-->
+        <app-day-track-view
+        [viewDate]="viewDate"
+        [calendar]="this"
+        [events]="events"
+        [resourceSchedules]="roomEvents"
+        [refresh]="refresh"
+        [locale]="locale"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChnaged)="eventTimesChanged($event)">
+        </app-day-track-view>
+      </div>
+    </div>
+
+  </div>
+</div>
