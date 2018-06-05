@@ -4,7 +4,8 @@ Dessa steg beskriver hur applikationen kan köras.
 Webbklienten är färdigbyggd så dessa steg beskriver hur man kör servern.
 ### MySQL
 Ladda ner och installera en MySQL-server. Om du kör windows kan detta göras genom: https://dev.mysql.com/downloads/installer/
-Ska gå att köra standard-inställningar vid installationen, kom ihåg vilket lösenord du valde till senare.
+
+Det ska gå att köra standard-inställningar vid installationen, kom ihåg vilket lösenord du valde till senare.
 ### Node.js
 Installera Node.js 8.X.X från https://nodejs.org/en/
 ### Node.js-bibliotek
