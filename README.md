@@ -30,4 +30,4 @@ Detta krävs ej för att köra applikationen men krävs om du vill göra ändrin
 ## Node.js-bibliotek
 Öppna konsol-fönster och navigera till "Client"-mappen. Kör sedan "npm install".
 
-Nu kan klienten byggas med "npm run build" för att bygga i produktionsläge (tar längre tid men mer optimerat), eller "npm run start" för att starta automatisk byggning som bygger om så fort det detekterar en ändring i en fil.
+Nu kan klienten byggas med "npm run build" för att bygga i produktionsläge (tar längre tid men mer optimerat), eller "npm run start" för att starta automatisk byggning som bygger om så fort den detekterar en ändring i en fil.
