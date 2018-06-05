@@ -14,7 +14,7 @@ För att senare kunna lägga in testdata i databasen kör även: "npm install se
 ### Initiering av databasen
 Öppna filen "Server/init_dev_database.js" och lägg till ditt MySQL-lösen på rad 2, från "const PASSWORD = '';" till const PASSWORD = '<ditt MySQL-lösen>';
 
-Öppna även "Server/src/config/config.json" och lägg till ditt MySQL-lösen på rad 4, från ""password": ""," till ""password": "<ditt MySQL-lösen>",".
+Öppna även "Server/src/config/config.json" och lägg till ditt MySQL-lösen på rad 4, från '"password": "",' till '"password": "<ditt MySQL-lösen>",'.
 
 I ditt konsol-fönster, navigera till "Server"-mappen och kör "node init_dev_database.js".
 ### Generering av testdata
